@@ -1,0 +1,81 @@
+<template name="map">
+    <div class="map-container">
+        {{> googleMap name="map" options=mapOptions }}
+    </div>
+    <div class="row">
+        <div class="col s12 l8">&nbsp;</div>
+        <div id="upper-layer">
+            <div class="card-panel col s12 l4">
+                {{#if currentUser}}
+                    <div class="row">
+                        <!--<div class="col s8 l8">&nbsp;</div>-->
+                        <div class="col s12 l12 right-align"><p class="break-word">{{>user}}</p><p>{{>atNavButton}}</p></div>
+                    </div>
+                    {{else}}
+                    <div class="">
+                        {{>atForm}}
+                    </div>
+                {{/if}}
+
+                {{#if currentUser}}
+                    <div class="card-panel">
+                        <form class="set-destination">
+                            <div class="row markers">
+                                <div class="input-field col s12 l12">
+                                    <input value="" id="form-set-address" type="text" class="validate"
+                                           name="formatted_address"
+                                           placeholder="Enter your destination">
+                                    <!--<label for="address">Destination</label>-->
+                                </div>
+                            </div>
+                            <input id="lat" name="lat" type="hidden" value="">
+                            <input id="lng" name="lng" type="hidden" value="">
+                            <div class="row">
+                                <div class="col s1 l1">&nbsp;</div>
+                                <div class="col s4 l4 waves-effect waves-light btn" id="set-destination">
+                                    Set Destination
+                                </div>
+                                <div class="col s2 l2">&nbsp;</div>
+                                <div class="col s4 l4 waves-effect waves-light btn" id="clear-destination">
+                                    Clear
+                                </div>
+                                <div class="col s1 l1">&nbsp;</div>
+                            </div>
+                        </form>
+                    </div>
+                {{/if}}
+
+                {{#with markers}}
+                    {{#if currentUser}}
+                    {{#if this.count}}
+                            <div class="card-panel">
+                                <div class="user-locations">
+                                <ul class="collection with-header">
+                                    <li class="collection-header"><h6>User Locations <span class="badge">{{this.count}}</span></h6></li>
+                                    {{#each markers}}
+                                        {{> marker}}
+                                    {{/each}}
+                                </ul>
+                                </div>
+                            </div>
+                    {{/if}}
+                    {{/if}}
+                {{/with}}
+            </div>
+        </div>
+    </div>
+</template>
+
+<template name="marker">
+    <li class="collection-item">
+        <div class="jump-marker row">
+            <div class="col s10 l10">
+                {{address}}
+            </div>
+            <div class="remove-marker col s2 l2 waves-light btn">&times;
+                <!--<a href="#!" class="secondary-content"><i class="material-icons">delete</i></a>-->
+            </div>
+        </div>
+    </li>
+</template>
+

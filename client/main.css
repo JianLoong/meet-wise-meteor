@@ -1,0 +1,46 @@
+.map-container {
+    height: 100%;
+    width: 100%;
+    position:absolute;
+    top: 0;
+    left: 0;
+    z-index: 0;
+}
+
+.row{
+    margin-bottom: 0px;
+}
+
+.container{
+
+}
+
+.material-icons.md-18 { font-size: 18px; }
+.material-icons.md-24 { font-size: 24px; }
+.material-icons.md-36 { font-size: 36px; }
+.material-icons.md-48 { font-size: 48px; }
+
+.collection.with-header .collection-item{
+    margin-bottom: 0px;
+}
+
+#upper-layer{
+    z-index: 1;
+    position: relative;
+}
+
+.user-locations{
+    overflow: auto;
+    max-height: 40vh;
+}
+
+/*#toast-container {*/
+    /*top: auto;*/
+    /*right: auto;*/
+    /*bottom: 10%;*/
+    /*left:7%;*/
+/*}*/
+
+.break-word {
+    word-wrap: break-word;
+}
