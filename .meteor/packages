@@ -29,3 +29,6 @@ useraccounts:materialize
 aldeed:geocoder
 jeremy:geocomplete
 
+perak:joins
+session
+deps

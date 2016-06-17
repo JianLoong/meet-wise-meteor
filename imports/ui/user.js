@@ -2,10 +2,12 @@
  * Created by Jian on 12/06/2016.
  */
 
+import {Markers} from '../api/markers.js';
+
 import './user.html';
 
-Template.user.helpers({
-    address: function() {
-        return Meteor.user().emails[0].address;
+Template.userLocations.helpers({
+    markers(){
+        return Markers.find({});
     }
 });

@@ -1,12 +1,20 @@
 <template name="navbar">
-    <nav>
-        <div class="nav-wrapper">
-            <a href="#" class="brand-logo">Meet Wise</a>
-            <ul id="nav-mobile" class="right hide-on-med-and-down">
-                <li><a href="sass.html">Sass</a></li>
-                <li><a href="badges.html">Components</a></li>
-                <li><a href="collapsible.html">JavaScript</a></li>
-            </ul>
-        </div>
-    </nav>
+    <div id="menu-container">
+        {{#if currentUser}}
+            <a class="btn-floating btn-large waves-effect waves-light teal"
+               id="menu-create-group">
+                <i class="material-icons" id="user-location-button">group_add</i>
+            </a>
+            <a class="btn-floating btn-large waves-effect
+                         waves-light teal" id="menuUserGroups"><i class="material-icons"
+                                                                  id="groupDetailsButton">group</i></a>
+            <a class="btn-floating btn-large waves-effect
+                         waves-light red" id="menuExitButton"><i class="material-icons"
+                                                                  id="exitButton">exit_to_app</i></a>
+            {{else}}
+            <a class="btn-floating btn-large waves-effect
+                         waves-light teal" id="hamburger-container"><i class="material-icons" id="hamburger">menu</i></a>
+
+        {{/if}}
+    </div>
 </template>

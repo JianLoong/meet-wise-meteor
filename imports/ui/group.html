@@ -1,0 +1,158 @@
+<template name="group">
+    <option value="{{_id}}">{{groupName}}, {{address}}</option>
+</template>
+
+<template name="groupMember">
+    <div class="groupMember">
+        <div id="{{_id}}">
+            <ul class="collection with-header">
+                <li class="collection-header">
+                    <div>Group Members</div>
+                </li>
+
+                {{#each users}}
+                    <li class="collection-item">
+                        {{email}}
+                    </li>
+                {{/each}}
+            </ul>
+            <div class="row">
+                <div class="col s1 l1">&nbsp;</div>
+                <div class="col s4 l4 waves-effect waves-light btn" id="addMember">
+                    Add Member
+                </div>
+                <div class="col s2 l2">&nbsp;</div>
+                <div class="col s4 l4 waves-effect waves-light btn" id="deleteGroup">
+                    Delete Group
+                </div>
+                <div class="col s1 l1">&nbsp;</div>
+            </div>
+            <div class="details">
+                <input name="groupId" type="hidden" value="{{_id}}">
+            </div>
+        </div>
+    </div>
+</template>
+
+<template name="addMember">
+    <div class="addMemberPanel">
+        <div class="form addMember">
+            <h5>Add Member<a class="secondary-content material-icons">&times;</a></h5>
+
+
+            <div class="row">
+                <div class="">
+                    <div class="input-field col s12 l12">
+                        <input value="" id="email" type="email" class="validate"/>
+                        <label for="addMember" data-error="Please enter a valid email." data-success=""
+                               class="">Enter email</label>
+                    </div>
+                </div>
+            </div>
+
+            <div class="row">
+                <div class="col s1 l1">&nbsp;</div>
+                <div class="col s10 l10 waves-effect waves-light btn" id="add">
+                    Add
+                </div>
+                <div class="col s1 l1">&nbsp;</div>
+            </div>
+        </div>
+    </div>
+</template>
+
+
+<template name="selectGroup">
+    <div class="selectGroupPanel">
+        {{#with groups}}
+            {{#if this.count}}
+                <h3>Select group<a class="secondary-content material-icons">close</a></h3>
+
+                {{#with groups}}
+                    {{#if this.count}}
+                        <div class="">
+                            <div class="input-field">
+
+                                <select id="selectGroup">
+                                    <option value="" disabled selected>Select your group.</option>
+                                    {{#each groups}}
+                                        {{> group}}
+                                    {{/each}}
+                                </select>
+
+                            </div>
+                        </div>
+                    {{/if}}
+
+                {{> userLocations}}
+
+                    <!--<div class="groupMembers">-->
+                        <!--{{#each groups}}-->
+                            <!--{{> groupMember}}-->
+                        <!--{{/each}}-->
+                    <!--</div>-->
+                {{/with}}
+            {{/if}}
+        {{/with}}
+    </div>
+
+</template>
+
+<template name="createGroup">
+    <div class="createGroupPanel">
+
+        <div class="form create-group">
+            <h3>Create Group<a class="secondary-content material-icons md-36">close</a></h3>
+            <div class="row">
+                <div class="">
+                    <div class="input-field col s12 l12">
+                        <input value="" id="form-set-address" type="text" class="validate"
+                               name="formatted-address"/>
+                        <label for="form-set-address" data-error="Please enter an address"
+                               data-success=""
+                               class="">Address</label>
+                    </div>
+                </div>
+            </div>
+
+            <div class="row">
+                <div class="">
+                    <div class="input-field col s12 l12">
+                        <input value="" id="group-name" type="text" class="validate"/>
+                        <label for="group-name" data-error="Please enter a group name" data-success=""
+                               class="">Group Name</label>
+                    </div>
+                </div>
+            </div>
+
+            <div class="row">
+                <div class="">
+                    <div class="input-field col s12 l12">
+                        <input type="date" class="datepicker" id="date"/>
+                        <label for="datePicker" data-error="Please enter a date" data-success=""
+                               class="">Date</label>
+                    </div>
+                </div>
+            </div>
+
+            <div class="row">
+                <div class="col s1 l1">&nbsp;</div>
+                <div class="col s4 l4 waves-effect waves-light btn" id="create-group">
+                    Create
+                </div>
+                <div class="col s2 l2">&nbsp;</div>
+                <div class="col s4 l4 waves-effect waves-light btn" id="clear-destination">
+                    Clear
+                </div>
+                <div class="col s1 l1">&nbsp;</div>
+            </div>
+            <div class="details">
+                <input name="lat" id="lat" type="hidden" value="">
+                <input name="lng" id="lng" type="hidden" value="">
+            </div>
+
+        </div>
+
+    </div>
+</template>
+

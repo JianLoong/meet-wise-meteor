@@ -1,39 +1,81 @@
 import { Meteor } from 'meteor/meteor';
 import { Mongo } from 'meteor/mongo';
-import { check } from 'meteor/check';
 
 export const Groups = new Mongo.Collection('groups');
 
 if (Meteor.isServer) {
-    // This code only runs on the server
-    Meteor.publish('groups', function markerPublication() {
-        return Groups.find();
+    Meteor.publish('groups', function groupPublication() {
+        return Groups.find({
+            "users.userId": this.userId
+        });
+    });
+
+    Meteor.methods({
+        'groups.insert'(groupName, destinationLat, destinationLong, address, createdAt, users){
+            return Groups.insert({
+                groupName: groupName,
+                lat: destinationLat,
+                lng: destinationLong,
+                createdAt: createdAt,
+                createdBy: this.userId,
+                address: address,
+                users: users
+            });
+        },
+
+        'groups.find'(groupId){
+            return Groups.find({
+                _id: groupId
+            })
+        },
+
+        'groups.update.addUser'(id, user){
+            Groups.update(
+                {_id: id},
+                {$push: {users: user}}
+            )
+        },
+
+        'groups.remove'(id){
+            Groups.remove({
+                _id: id
+            })
+        },
+
+        'groups.update'(id, destination){
+            Groups.update(id, {
+                $set: {
+                    destination: destination
+                }
+            });
+        },
+
+        'member.add'(email, groupId){
+            var user = Meteor.users.findOne({
+                "emails.address": email
+            // }, function (error, result) {
+            //     if(error)
+            //         throw new Meteor.Error('not-authorized');
+            //     else{
+            //         user = result;
+            //     }
+            });
+
+
+            console.log(user);
+
+            var userId = user._id;
+            var email = user.emails[0].address;
+            var groupId = groupId;
+
+            var u = new User(userId, email, "false");
+
+            Groups.update(
+                {_id: groupId},
+                {$push: {users: u}}
+            )
+
+
+        }
     });
 }
-
-Meteor.methods({
-    'groups.insert'(id, name, group_type, country_code, updated_at, members, destination){
-        Groups.insert({
-            name: name,
-            group_type: group_type,
-            country_code: country_code,
-            updated_at: updated_at,
-            members: members,
-            destination: destination
-        });
-    },
-
-    'groups.remove'(id){
-        Groups.remove({
-            _id: id
-        })
-    },
-
-    'groups.update'(id, destination){
-        Groups.update(id, {
-            $set: {
-                destination: destination
-            }
-        });
-    }
-});

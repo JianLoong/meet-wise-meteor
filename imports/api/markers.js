@@ -1,14 +1,26 @@
-import { Meteor } from 'meteor/meteor';
-import { Mongo } from 'meteor/mongo';
-import { check } from 'meteor/check';
+import {Meteor} from 'meteor/meteor';
+import {Mongo} from 'meteor/mongo';
+import {check} from 'meteor/check';
 
 export const Markers = new Mongo.Collection('markers');
 
+import {Groups} from '../api/groups.js';
 
 if (Meteor.isServer) {
     // This code only runs on the server
     Meteor.publish('markers', function markerPublication() {
-        return Markers.find();
+
+        return Markers.find({
+                // "userid._id": this.userId
+            }
+        )
+    });
+
+    Meteor.publish('groupMarkers', function groupMarkersPublication(groupId){
+        
+        return Markers.find({
+            groupId : groupId
+        })
     });
 
     var geo = new GeoCoder({
@@ -16,11 +28,10 @@ if (Meteor.isServer) {
         apiKey: 'AIzaSyDslRnnzBLry5hp0VWs39EkserC9tyemX0 '
     });
 
-
     Meteor.methods({
-        'markers.insert'(userid, lat, lng){
+        'markers.insert'(userid, groupId, lat, lng){
 
-            if (! Meteor.userId()) {
+            if (!Meteor.userId()) {
                 throw new Meteor.Error('not-authorized');
             }
 
@@ -28,14 +39,15 @@ if (Meteor.isServer) {
                 var result = geo.reverse(lat, lng);
                 Markers.insert({
                     userid: userid,
+                    groupId: groupId,
                     lat: lat,
                     lng: lng,
                     address: result[0].formattedAddress
                 });
-
-            }catch(e){
-                console.log(e);
+            } catch (e) {
                 Markers.insert({
+                    userid: userid,
+                    groupId: groupId,
                     lat: lat,
                     lng: lng,
                     address: "No address."
@@ -44,34 +56,13 @@ if (Meteor.isServer) {
         },
 
         'markers.findAll'(){
-
             return Markers.find({});
-
-        },
-
-        'users.find'(id){
-
-            var result = Meteor.User.find({
-                _id: id
-            }).fetch();
-
-            console.log(result);
         },
 
         'markers.find'(id){
-
             var result = Markers.find({
                 _id: id
             }).fetch();
-
-            // console.log(result);
-            //
-            // var userEmail = Meteor.user().find({
-            //     _id: id
-            // }).fetch();
-            //
-            // console.log(userEmail);
-
             return result;
         },
 
@@ -79,10 +70,6 @@ if (Meteor.isServer) {
             Markers.remove({
                 _id: id
             });
-        },
-
-        'markers.removeAll'(){
-            Markers.remove({});
         },
 
         'markers.updateAddress'(id, address){
