@@ -17,7 +17,7 @@ Template.body.onCreated(function bodyOnCreated() {
 
 Template.body.onRendered( function () {
 
-    $('#map').addClass("hide-on-small-only");
+    // $('#map').addClass("hide-on-small-only");
 
     $('.createGroupPanel').hide();
     $('.userLocationsPanel').hide();

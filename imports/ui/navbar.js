@@ -21,7 +21,7 @@ Template.navbar.events({
         $('.button-collapse').sideNav('hide');
         $('.instructionsPanel').hide();
 
-        $('#map').addClass("hide-on-small-only");
+        //$('#map').addClass("hide-on-small-only");
 
         $('.addMemberPanel').hide();
         $('.userDetailsPanel').hide();
@@ -37,7 +37,7 @@ Template.navbar.events({
     },
 
     'click #menuExitButton'(){
-        $('#map').addClass("hide-on-small-only");
+        //$('#map').addClass("hide-on-small-only");
 
         $('.button-collapse').sideNav('hide');
         $('.addMemberPanel').hide();
@@ -52,7 +52,7 @@ Template.navbar.events({
     },
 
     'click #groupDetailsButton'(){
-        $('#map').addClass("hide-on-small-only");
+        //$('#map').addClass("hide-on-small-only");
         $('.button-collapse').sideNav('hide');
 
         $('.instructionsPanel').hide();
@@ -70,7 +70,7 @@ Template.navbar.events({
     'click #mapButton'(){
         $('.button-collapse').sideNav('hide');
 
-        $('#map').removeClass("hide-on-small-only");
+        //$('#map').removeClass("hide-on-small-only");
 
         $('.addMemberPanel').hide();
         $('.createGroupPanel').hide();
