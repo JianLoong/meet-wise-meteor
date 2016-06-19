@@ -1,17 +1,19 @@
 <body>
-{{> map}}
 {{> navbar}}
-<div class="">
+<br />
+<br />
+<div class="container">
     <div class="row">
-        <div class="contents card-panel col s12 l4 offset-l8 pull-l8">
+        <div id="map" class="col s12 l6">
+            {{> map}}
+        </div>
+        <div class="contents card-panel col s12 l6">
             {{> createGroup}}
-
             {{> selectGroup}}
             {{> userDetails}}
-            {{> addMember}}
-            <!--{{> userLocations}}-->
+
+
         </div>
     </div>
-
 </div>
 </body>

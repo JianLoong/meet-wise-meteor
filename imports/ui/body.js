@@ -17,13 +17,15 @@ Template.body.onCreated(function bodyOnCreated() {
 
 Template.body.onRendered( function () {
     $('.createGroupPanel').hide();
-    // $('.userLocationsPanel').hide();
-    $('.userDetailsPanel').hide();
+    $('.userLocationsPanel').hide();
+
     $('.selectGroupPanel').hide();
     $('.groupDetailsPanel').hide();
     $('.addMemberPanel').hide();
 
     $('.upperPanel').hide();
+    $(".dropdown-button").dropdown();
+    $(".button-collapse").sideNav();
 });
 
 Template.body.helpers({

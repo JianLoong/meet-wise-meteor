@@ -51,30 +51,28 @@ if (Meteor.isServer) {
         },
 
         'member.add'(email, groupId){
-            var user = Meteor.users.findOne({
-                "emails.address": email
-            // }, function (error, result) {
-            //     if(error)
-            //         throw new Meteor.Error('not-authorized');
-            //     else{
-            //         user = result;
-            //     }
-            });
+            var user = Meteor.users.findOne({"emails.address": email});
 
+            if (typeof user === "undefined") {
+                throw new Meteor.Error('Email is not registered.');
+            };
 
-            console.log(user);
 
             var userId = user._id;
             var email = user.emails[0].address;
             var groupId = groupId;
 
             var u = new User(userId, email, "false");
+            var flag = Groups.findOne({ _id : groupId, "users.userId": userId});
 
-            Groups.update(
-                {_id: groupId},
-                {$push: {users: u}}
-            )
-
+            if (typeof flag === "undefined") {
+                Groups.update(
+                    {_id: groupId},
+                    {$push: {users: u}}
+                )
+            }else{
+                throw new Meteor.Error('Email exist in the group.');
+            }
 
         }
     });

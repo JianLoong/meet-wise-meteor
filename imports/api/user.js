@@ -5,5 +5,5 @@ User = function User(userId, email, status){
 };
 
 Meteor.methods({
-
+    
 });

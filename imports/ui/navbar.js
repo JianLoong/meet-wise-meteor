@@ -1,29 +1,43 @@
 import './navbar.html';
 
 Template.navbar.events({
-    'click #hamburger'(){
+    'click #loginButton'(){
+
+        $('.button-collapse').sideNav('hide');
+
+
         $('.addMemberPanel').hide();
         $('.userLocationsPanel').hide();
         $('.createGroupPanel').hide();
         $('.selectGroupPanel').hide();
         $('.groupDetailsPanel').hide();
-        $('.userDetailsPanel').toggle();
+
+
+        $('.userDetailsPanel').show();
     },
 
-    'click #user-location-button'(){
+    'click #createGroupButton'(){
+        $('.button-collapse').sideNav('hide');
+
+        $('#map').addClass("hide-on-small-only");
+
         $('.addMemberPanel').hide();
         $('.userDetailsPanel').hide();
         $('.selectGroupPanel').hide();
         $('.groupDetailsPanel').hide();
 
 
-        $('.createGroupPanel').toggle();
+        $('.createGroupPanel').show();
+        $('.userLocationsPanel').hide();
         $('#form-set-address').removeAttr("placeholder");
 
         $('.datepicker').pickadate({});
     },
 
     'click #menuExitButton'(){
+        $('#map').addClass("hide-on-small-only");
+
+        $('.button-collapse').sideNav('hide');
         $('.addMemberPanel').hide();
         $('.createGroupPanel').hide();
         $('.userLocationsPanel').hide();
@@ -36,15 +50,31 @@ Template.navbar.events({
     },
 
     'click #groupDetailsButton'(){
+        $('#map').addClass("hide-on-small-only");
+        $('.button-collapse').sideNav('hide');
 
 
         $('.userDetailsPanel').hide();
         $('.createGroupPanel').hide();
+        //
+        $('.addMemberPanel').show();
+
+        $('.userLocationsPanel').show();
+
+        $('.selectGroupPanel').show();
+        $('.groupDetailsPanel').show();
+    },
+
+    'click #mapButton'(){
+        $('.button-collapse').sideNav('hide');
+
+        $('#map').removeClass("hide-on-small-only");
+
         $('.addMemberPanel').hide();
-
-        //$('.userLocationsPanel').toggle();
-
-        $('.selectGroupPanel').toggle();
-        $('.groupDetailsPanel').toggle();
+        $('.createGroupPanel').hide();
+        $('.userLocationsPanel').hide();
+        $('.userDetailsPanel').hide();
+        $('.selectGroupPanel').hide();
+        $('.groupDetailsPanel').hide();
     }
 });

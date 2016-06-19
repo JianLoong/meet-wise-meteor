@@ -11,3 +11,19 @@ Template.userLocations.helpers({
         return Markers.find({});
     }
 });
+
+Template.userLocations.events({
+    'click .remove-marker'(event){
+        event.preventDefault();
+        Meteor.call("markers.remove", this._id);
+    },
+
+    'click .jumpMarker'(event){
+        GoogleMaps.maps.map.instance.setCenter(new google.maps.LatLng(this.lat, this.lng));
+    },
+
+    'click .removeMarker'(event){
+        event.preventDefault();
+        Meteor.call("markers.remove", this._id);
+    },
+})

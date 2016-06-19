@@ -5,9 +5,10 @@
 <template name="groupMember">
     <div class="groupMember">
         <div id="{{_id}}">
+
             <ul class="collection with-header">
                 <li class="collection-header">
-                    <div>Group Members</div>
+                    <div>Group Member : {{groupName}}</div>
                 </li>
 
                 {{#each users}}
@@ -16,20 +17,21 @@
                     </li>
                 {{/each}}
             </ul>
-            <div class="row">
-                <div class="col s1 l1">&nbsp;</div>
-                <div class="col s4 l4 waves-effect waves-light btn" id="addMember">
-                    Add Member
-                </div>
-                <div class="col s2 l2">&nbsp;</div>
-                <div class="col s4 l4 waves-effect waves-light btn" id="deleteGroup">
-                    Delete Group
-                </div>
-                <div class="col s1 l1">&nbsp;</div>
-            </div>
-            <div class="details">
-                <input name="groupId" type="hidden" value="{{_id}}">
-            </div>
+            <!--<div class="row">-->
+                <!--<div class="col s1 l1">&nbsp;</div>-->
+                <!--<div class="col s4 l4 waves-effect waves-light btn" id="addMember">-->
+                    <!--Add Member-->
+                <!--</div>-->
+                <!--<div class="col s2 l2">&nbsp;</div>-->
+                <!--<div class="col s4 l4 waves-effect waves-light btn" id="viewGroup">-->
+                    <!--View Group-->
+                <!--</div>-->
+                <!--<div class="col s1 l1">&nbsp;</div>-->
+            <!--</div>-->
+            <!--<div class="details">-->
+                <!--<input name="groupId" type="hidden" value="{{_id}}">-->
+            <!--</div>-->
+            {{> addMember}}
         </div>
     </div>
 </template>
@@ -41,12 +43,10 @@
 
 
             <div class="row">
-                <div class="">
-                    <div class="input-field col s12 l12">
-                        <input value="" id="email" type="email" class="validate"/>
-                        <label for="addMember" data-error="Please enter a valid email." data-success=""
-                               class="">Enter email</label>
-                    </div>
+                <div class="input-field col s12 l12">
+                    <input value="" id="email" type="email" class="validate"/>
+                    <label for="addMember" data-error="Please enter a valid email." data-success=""
+                           class="">Enter email</label>
                 </div>
             </div>
 
@@ -66,7 +66,7 @@
     <div class="selectGroupPanel">
         {{#with groups}}
             {{#if this.count}}
-                <h3>Select group<a class="secondary-content material-icons">close</a></h3>
+                <h3>Select group</h3>
 
                 {{#with groups}}
                     {{#if this.count}}
@@ -84,18 +84,21 @@
                         </div>
                     {{/if}}
 
-                {{> userLocations}}
 
-                    <!--<div class="groupMembers">-->
-                        <!--{{#each groups}}-->
-                            <!--{{> groupMember}}-->
-                        <!--{{/each}}-->
-                    <!--</div>-->
+
+                    <div class="groupMembers">
+
+
+                        {{#each groups}}
+                            {{> groupMember}}
+                        {{/each}}
+                    </div>
+                    {{> userLocations}}
+
                 {{/with}}
             {{/if}}
         {{/with}}
     </div>
-
 </template>
 
 <template name="createGroup">

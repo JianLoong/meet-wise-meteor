@@ -19,11 +19,24 @@ Template.addMember.events({
         var email = $('#email').val();
         var groupId = $('#selectGroup').val();
 
+        if(email.length == 0){
+            $('.toast').hide();
+            $('#email').addClass("invalid");
+            $('#email').val("");
+            $("label[for='addMember']").addClass("active").attr("data-error", "Enter a valid email address.");
+            return;
+        }
+        
+
         Meteor.call("member.add",email, groupId, function(error, result){
             if(error){
+                $('.toast').hide();
                 $('#email').addClass("invalid");
-                Materialize.toast("Email not registered.", 4000);
-                return;
+                $("label[for='addMember']").addClass("active").attr("data-error", error.error);
+                Materialize.toast(error.error, 4000);
+            }else{
+                $('.toast').hide();
+                Materialize.toast("Member added successfully.", 4000);
             }
         });
 
@@ -33,8 +46,15 @@ Template.addMember.events({
 
 Template.groupMember.events({
     'click #addMember'(event){
-        $('.selectGroupPanel').hide();
+        //$('.selectGroupPanel').hide();
         $('.addMemberPanel').show();
+    },
+
+    'click #viewGroup'(event){
+        alert(this._id);
+        $('.selectGroupPanel').hide();
+        $('.userLocationsPanel').show();
+
     }
 });
 
@@ -47,12 +67,6 @@ Meteor.startup(function () {
 
 
 
-Template.group.onRendered( function (){
-    this.autorun(function () {
-        $('select').material_select();
-    })
-})
-
 Template.groupMember.onRendered( function (){
 
     this.autorun(function (){
@@ -60,15 +74,7 @@ Template.groupMember.onRendered( function (){
     })
 })
 
-Template.createGroup.onRendered(function () {
-    this.autorun(function () {
-        if(GoogleMaps.loaded()){
-            $("#form-set-address").geocomplete({
-                details: ".details"
-            });
-        }
-    })
-})
+
 
 Template.selectGroup.events({
     'change #selectGroup'(event){
@@ -83,8 +89,24 @@ Template.selectGroup.events({
             Meteor.subscribe('groupMarkers', Session.get('groupId'));
         });
     },
-})
+});
 
+
+Template.group.onRendered( function (){
+    this.autorun(function () {
+        $('select').material_select();
+    })
+});
+
+Template.createGroup.onRendered(function () {
+    this.autorun(function () {
+        if(GoogleMaps.loaded()){
+            $("#form-set-address").geocomplete({
+                details: ".details"
+            });
+        }
+    })
+});
 
 Template.createGroup.events({
     'click #create-group'(event){

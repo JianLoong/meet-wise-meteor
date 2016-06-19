@@ -1,87 +1,100 @@
 .map-container {
-    height: 100%;
-    width: 100%;
-    position: absolute;
-    top: 0;
-    left: 0;
-    z-index: 0;
-}
-
-.material-icons.md-18 {
-    font-size: 8px;
-}
-
-.material-icons.md-18 {
-    font-size: 18px;
-}
-
-.material-icons.md-24 {
-    font-size: 24px;
-}
-
-.material-icons.md-36 {
-    font-size: 36px;
-}
-
-.material-icons.md-48 {
-    font-size: 48px;
-}
-
-.collection.with-header .collection-item {
-    margin-bottom: 0px;
-}
-
-#upper-layer {
-    z-index: 1;
-    position: relative;
-    max-height: 80vh;
-    margin-left: 1em;
-    margin-right: 1em;
-}
-
-.break-word {
-    word-wrap: break-word;
-}
-
-#hamburger, #create-group-menu {
-    z-index: 1;
-}
-
-#menu-container {
-    /*position: absolute;*/
-    padding-top: 1vh;
-    padding-left: 1vh;
-    /*right: 1vh;*/
+    width: 800px;
+    max-width: 100%;
+    height: 500px;
 }
 
 
-.upperPanel {
-    z-index: 1;
-    position: relative;
-    max-height: 80vh;
-    margin-left: 1em;
-    margin-right: 1em;
-}
+.container{
 
-.createGroupPanel,
-.selectGroupPanel,
-.userDetailsPanel,
-.userGroupsPanel,
-.groupDetailsPanel,
-.addMemberPanel,
-.userLocationsPanel
-{
-    z-index: 1;
-    position: relative;
-    max-height: 70vh;
-    margin-left: 1em;
-    margin-right: 1em;
 }
+/*.navbar{*/
+    /*z-index:1;*/
+    /*position: relative;*/
+/*}*/
 
-.selectGroupPanel{
-    overflow-y: auto;
-    min-height: 80vh;
-}
+/*.material-icons.md-18 {*/
+    /*font-size: 8px;*/
+/*}*/
+
+/*.material-icons.md-18 {*/
+    /*font-size: 18px;*/
+/*}*/
+
+/*.material-icons.md-24 {*/
+    /*font-size: 24px;*/
+/*}*/
+
+/*.material-icons.md-36 {*/
+    /*font-size: 36px;*/
+/*}*/
+
+/*.material-icons.md-48 {*/
+    /*font-size: 48px;*/
+/*}*/
+
+/*.collection.with-header .collection-item {*/
+    /*margin-bottom: 0px;*/
+/*}*/
+
+/*#upper-layer {*/
+    /*z-index: 1;*/
+    /*position: relative;*/
+    /*max-height: 80vh;*/
+    /*margin-left: 1em;*/
+    /*margin-right: 1em;*/
+/*}*/
+
+/*.break-word {*/
+    /*word-wrap: break-word;*/
+/*}*/
+
+/*#hamburger, #create-group-menu {*/
+    /*z-index: 1;*/
+/*}*/
+
+/*#menu-container {*/
+    /*!*position: absolute;*!*/
+    /*padding-top: 1vh;*/
+    /*padding-left: 1vh;*/
+    /*!*right: 1vh;*!*/
+/*}*/
+
+
+/*.upperPanel {*/
+    /*z-index: 1;*/
+    /*position: relative;*/
+    /*max-height: 80vh;*/
+    /*margin-left: 1em;*/
+    /*margin-right: 1em;*/
+/*}*/
+
+/*.createGroupPanel,*/
+/*.selectGroupPanel,*/
+/*.userDetailsPanel,*/
+/*.userGroupsPanel,*/
+/*.groupDetailsPanel,*/
+/*.addMemberPanel*/
+/*{*/
+    /*z-index: 1;*/
+    /*position: relative;*/
+    /*max-height: 70vh;*/
+    /*margin-left: 1em;*/
+    /*margin-right: 1em;*/
+/*}*/
+
+/*.userLocationsPanel{*/
+    /*max-height: 70vh;*/
+    /*z-index: 1;*/
+    /*position: relative;*/
+    /*margin-left: 1em;*/
+    /*margin-right: 1em;*/
+    /*overflow: scroll;*/
+/*}*/
+
+/*.selectGroupPanel{*/
+
+/*}*/
 
 label[data-error]:after {
     white-space: nowrap;
