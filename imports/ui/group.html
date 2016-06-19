@@ -5,41 +5,31 @@
 <template name="groupMember">
     <div class="groupMember">
         <div id="{{_id}}">
+            <h5>Group Members</h5>
+            <table class="striped">
+                <thead>
+                    <tr><th data-field="email">Email</th></tr>
+                </thead>
 
-            <ul class="collection with-header">
-                <li class="collection-header">
-                    <div>Group Member : {{groupName}}</div>
-                </li>
-
-                {{#each users}}
-                    <li class="collection-item">
-                        {{email}}
-                    </li>
+                <tbody>
+               {{#each users}}
+                    <tr>
+                        <td>{{email}}</td>
+                    </tr>
                 {{/each}}
-            </ul>
-            <!--<div class="row">-->
-                <!--<div class="col s1 l1">&nbsp;</div>-->
-                <!--<div class="col s4 l4 waves-effect waves-light btn" id="addMember">-->
-                    <!--Add Member-->
-                <!--</div>-->
-                <!--<div class="col s2 l2">&nbsp;</div>-->
-                <!--<div class="col s4 l4 waves-effect waves-light btn" id="viewGroup">-->
-                    <!--View Group-->
-                <!--</div>-->
-                <!--<div class="col s1 l1">&nbsp;</div>-->
-            <!--</div>-->
-            <!--<div class="details">-->
-                <!--<input name="groupId" type="hidden" value="{{_id}}">-->
-            <!--</div>-->
+                </tbody>
+            </table>
+
+
             {{> addMember}}
         </div>
     </div>
 </template>
 
 <template name="addMember">
-    <div class="addMemberPanel">
+    <div class="addMemberPanel card-panel">
         <div class="form addMember">
-            <h5>Add Member<a class="secondary-content material-icons">&times;</a></h5>
+            <h5>Add Member</h5>
 
 
             <div class="row">
@@ -63,7 +53,7 @@
 
 
 <template name="selectGroup">
-    <div class="selectGroupPanel">
+    <div class="selectGroupPanel card-panel">
         {{#with groups}}
             {{#if this.count}}
                 <h3>Select group</h3>
