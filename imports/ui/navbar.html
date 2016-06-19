@@ -1,21 +1,5 @@
 <template name="navbar">
     <div id="menu-container">
-    <!--{{#if currentUser}}-->
-        <!--<a class="btn-floating btn-large waves-effect waves-light teal"-->
-        <!--id="menu-create-group">-->
-        <!--<i class="material-icons" id="createGroupButton">group_add</i>-->
-        <!--</a>-->
-        <!--<a class="btn-floating btn-large waves-effect waves-light teal"-->
-        <!--id="menuUserGroups"><i class="material-icons" id="groupDetailsButton">group</i>-->
-        <!--</a>-->
-        <!--<a class="btn-floating btn-large waves-effect-->
-        <!--waves-light red" id="menuExitButton"><i class="material-icons"-->
-        <!--id="exitButton">exit_to_app</i></a>-->
-            <!--{{else}}-->
-        <!--<a class="btn-floating btn-large waves-effect-->
-        <!--waves-light teal" id="hamburger-container"><i class="material-icons" id="hamburger">menu</i></a>-->
-
-            <!--{{/if}}-->
         <nav>
 
                 <div class="nav-wrapper">
@@ -35,8 +19,8 @@
                         {{#if currentUser}}
                             <li><a id="createGroupButton">Create Group</a></li>
                             <li><a id="groupDetailsButton">Group Details</a></li>
-                            <li><a id="menuExitButton">Exit</a></li>
                             <li><a id="mapButton">Map</a></li>
+                            <li><a id="menuExitButton">Exit</a></li>
                         {{else}}
                             <li><a id="loginButton">Login</a></li>
                         {{/if}}

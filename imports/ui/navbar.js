@@ -41,7 +41,7 @@ Template.navbar.events({
         $('.addMemberPanel').hide();
         $('.createGroupPanel').hide();
         $('.userLocationsPanel').hide();
-        $('.userDetailsPanel').hide();
+        $('.userDetailsPanel').show();
         $('.selectGroupPanel').hide();
         $('.groupDetailsPanel').hide();
 
