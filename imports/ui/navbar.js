@@ -11,6 +11,7 @@ Template.navbar.events({
         $('.createGroupPanel').hide();
         $('.selectGroupPanel').hide();
         $('.groupDetailsPanel').hide();
+        $('.instructionsPanel').hide();
 
 
         $('.userDetailsPanel').show();
@@ -18,6 +19,7 @@ Template.navbar.events({
 
     'click #createGroupButton'(){
         $('.button-collapse').sideNav('hide');
+        $('.instructionsPanel').hide();
 
         $('#map').addClass("hide-on-small-only");
 
@@ -53,7 +55,7 @@ Template.navbar.events({
         $('#map').addClass("hide-on-small-only");
         $('.button-collapse').sideNav('hide');
 
-
+        $('.instructionsPanel').hide();
         $('.userDetailsPanel').hide();
         $('.createGroupPanel').hide();
         //
