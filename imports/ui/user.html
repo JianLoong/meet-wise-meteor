@@ -10,7 +10,6 @@
 </template>
 
 <template name="userDetails">
-
     <div class="userDetailsPanel">
         {{#if currentUser}}
             <div class="col s12 l12 center-align">
@@ -25,7 +24,7 @@
 </template>
 
 <template name="userLocations">
-    <div class="userLocationsPanel">
+    <div class="userLocationsPanel card-panel">
         {{#with markers}}
             {{#if currentUser}}
                 {{#if this.count}}

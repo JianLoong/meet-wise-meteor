@@ -8,11 +8,13 @@
             <h5>Group Members</h5>
             <table class="striped">
                 <thead>
-                    <tr><th data-field="email">Email</th></tr>
+                <tr>
+                    <th data-field="email">Email</th>
+                </tr>
                 </thead>
 
                 <tbody>
-               {{#each users}}
+                {{#each users}}
                     <tr>
                         <td>{{email}}</td>
                     </tr>
@@ -53,41 +55,42 @@
 
 
 <template name="selectGroup">
-    <div class="selectGroupPanel card-panel">
+    <div class="row">
+    <div class="selectGroupPanel card-panel col l12">
         {{#with groups}}
             {{#if this.count}}
-                <h3>Select group</h3>
+                <!--<h3>Select group</h3>-->
 
-                {{#with groups}}
-                    {{#if this.count}}
-                        <div class="">
-                            <div class="input-field">
+                {{#if this.count}}
+                    <div class="">
+                        <div class="input-field">
 
-                                <select id="selectGroup">
-                                    <option value="" disabled selected>Select your group.</option>
-                                    {{#each groups}}
-                                        {{> group}}
-                                    {{/each}}
-                                </select>
+                            <select id="selectGroup">
+                                <option value="" disabled selected>Select your group.</option>
+                                {{#each groups}}
+                                    {{> group}}
+                                {{/each}}
+                            </select>
 
-                            </div>
                         </div>
-                    {{/if}}
-
-
-
-                    <div class="groupMembers">
-
-
-                        {{#each groups}}
-                            {{> groupMember}}
-                        {{/each}}
                     </div>
-                    {{> userLocations}}
+                {{/if}}
 
-                {{/with}}
+
+
+                <!--<div class="groupMembers">-->
+
+
+                    <!--{{#each groups}}-->
+                <!--{{> groupMember}}-->
+                    <!--{{/each}}-->
+                <!--</div>-->
+                <!--{{> userLocations}}-->
+
+
             {{/if}}
         {{/with}}
+    </div>
     </div>
 </template>
 

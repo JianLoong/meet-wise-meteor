@@ -5,6 +5,7 @@ import {Markers} from '../api/markers.js';
 
 import './map.html';
 
+
 var stringToColour = function (str) {
     // str to hash
     for (var i = 0, hash = 0; i < str.length; hash = str.charCodeAt(i++) + ((hash << 5) - hash));
@@ -17,8 +18,12 @@ var stringToColour = function (str) {
 
 Template.map.onCreated(function () {
 
-    //Each marker would belong to a group.
     GoogleMaps.ready('map', function (map) {
+
+        map.instance.controls[google.maps.ControlPosition.TOP_LEFT].push(
+            document.getElementById('legend')
+        );
+
 
         google.maps.event.addListener(map.instance, 'click', function (event) {
             if (Meteor.user() == null) {
@@ -44,6 +49,7 @@ Template.map.onCreated(function () {
         var infowindow = new google.maps.InfoWindow();
         var iconBase = 'https://maps.google.com/mapfiles/kml/shapes/';
 
+        var icon = "person_pin_circle.png";
 
         Tracker.autorun(function () {
             Markers.find().observe({
@@ -71,7 +77,7 @@ Template.map.onCreated(function () {
                         position: new google.maps.LatLng(document.lat, document.lng),
                         map: map.instance,
                         id: document._id,
-                        icon: pinSymbol(colour)
+                        icon: icon
 
                     });
 
@@ -106,6 +112,10 @@ Meteor.startup(function () {
 });
 
 Template.map.helpers({
+
+    markers: function() {
+      return Markers.find({});
+    },
 
     mapOptions: function () {
 
@@ -172,8 +182,7 @@ Template.map.helpers({
             return {
                 center: new google.maps.LatLng(-37.8136, 144.9631),
                 zoom: 15,
-                disableDefaultUI: false,
-                styles: styles
+                disableDefaultUI: true
             };
         }
     },

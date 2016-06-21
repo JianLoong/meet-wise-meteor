@@ -21,6 +21,8 @@ Template.navbar.events({
         $('.button-collapse').sideNav('hide');
         $('.instructionsPanel').hide();
 
+        $('.map-container').hide();
+
         //$('#map').addClass("hide-on-small-only");
 
         $('.addMemberPanel').hide();
@@ -59,12 +61,12 @@ Template.navbar.events({
         $('.userDetailsPanel').hide();
         $('.createGroupPanel').hide();
         //
-        $('.addMemberPanel').show();
+        //$('.addMemberPanel').show();
 
-        $('.userLocationsPanel').show();
-
+        //$('.userLocationsPanel').show();
+        $('.map-container').show();
         $('.selectGroupPanel').show();
-        $('.groupDetailsPanel').show();
+        //$('.groupDetailsPanel').show();
     },
 
     'click #mapButton'(){

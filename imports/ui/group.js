@@ -19,6 +19,11 @@ Template.addMember.events({
         var email = $('#email').val();
         var groupId = $('#selectGroup').val();
 
+        //console.log(this._id);
+
+        alert(groupId);
+        alert(this._id);
+
         if(email.length == 0){
             $('.toast').hide();
             $('#email').addClass("invalid");
