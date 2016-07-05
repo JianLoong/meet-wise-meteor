@@ -11,7 +11,11 @@ if (Meteor.isServer) {
     });
 
     Meteor.methods({
+
         'groups.insert'(groupName, destinationLat, destinationLong, address, createdAt, users){
+            if (!this.userId) {
+                throw new Meteor.Error('not-authorized');
+            }
             return Groups.insert({
                 groupName: groupName,
                 lat: destinationLat,
@@ -24,12 +28,18 @@ if (Meteor.isServer) {
         },
 
         'groups.find'(groupId){
+            if (!this.userId) {
+                throw new Meteor.Error('not-authorized');
+            }
             return Groups.find({
                 _id: groupId
             })
         },
 
         'groups.update.addUser'(id, user){
+            if (!this.userId) {
+                throw new Meteor.Error('not-authorized');
+            }
             Groups.update(
                 {_id: id},
                 {$push: {users: user}}
@@ -37,12 +47,18 @@ if (Meteor.isServer) {
         },
 
         'groups.remove'(id){
+            if (!this.userId) {
+                throw new Meteor.Error('not-authorized');
+            }
             Groups.remove({
                 _id: id
             })
         },
 
         'groups.update'(id, destination){
+            if (!this.userId) {
+                throw new Meteor.Error('not-authorized');
+            }
             Groups.update(id, {
                 $set: {
                     destination: destination
@@ -50,18 +66,37 @@ if (Meteor.isServer) {
             });
         },
 
+        //This meteor call removes a user from a group.
+        'member.remove'(groupId, userId){
+            if (!this.userId) {
+                throw new Meteor.Error('not-authorized');
+            }
+            
+            Groups.update(
+                {
+                    _id: groupId,
+                    createdBy: { $ne: userId }
+                },
+
+                { $pull:
+                    { users: { "userId": userId }
+                    }
+                });
+        },
+
+        //This method adds a user based on email to the group.
         'member.add'(email, groupId){
+            if (!this.userId) {
+                throw new Meteor.Error('not-authorized');
+            }
             var user = Meteor.users.findOne({"emails.address": email});
 
             if (typeof user === "undefined") {
                 throw new Meteor.Error('Email is not registered.');
-            };
+            }
 
 
             var userId = user._id;
-            var email = user.emails[0].address;
-            var groupId = groupId;
-
             var u = new User(userId, email, "false");
             var flag = Groups.findOne({ _id : groupId, "users.userId": userId});
 

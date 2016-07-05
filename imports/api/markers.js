@@ -31,7 +31,7 @@ if (Meteor.isServer) {
     Meteor.methods({
         'markers.insert'(userid, groupId, lat, lng){
 
-            if (!Meteor.userId()) {
+            if (!this.userId) {
                 throw new Meteor.Error('not-authorized');
             }
 
@@ -60,6 +60,11 @@ if (Meteor.isServer) {
         },
 
         'markers.find'(id){
+            
+            if (!this.userId) {
+                throw new Meteor.Error('not-authorized');
+            }
+
             var result = Markers.find({
                 _id: id
             }).fetch();
@@ -67,12 +72,18 @@ if (Meteor.isServer) {
         },
 
         'markers.remove'(id){
+            if (!this.userId) {
+                throw new Meteor.Error('not-authorized');
+            }
             Markers.remove({
                 _id: id
             });
         },
 
         'markers.updateAddress'(id, address){
+            if (!this.userId) {
+                throw new Meteor.Error('not-authorized');
+            }
             Markers.update(id, {
                 $set: {
                     address: address
@@ -81,6 +92,9 @@ if (Meteor.isServer) {
         },
 
         'markers.update'(id, lat, lng){
+            if (!this.userId) {
+                throw new Meteor.Error('not-authorized');
+            }
 
             var result = geo.reverse(lat, lng);
 
