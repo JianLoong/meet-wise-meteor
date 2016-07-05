@@ -4,3 +4,6 @@ import '../imports/ui/markers.js';
 import '../imports/ui/user.js';
 import '../imports/ui/group.js';
 import '../imports/ui/navbar.js';
+import '../imports/ui/createGroup.js';
+import '../imports/ui/addMember.js';
+import '../imports/ui/removeMember.js';

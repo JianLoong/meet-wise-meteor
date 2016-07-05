@@ -25,7 +25,7 @@ Template.navbar.events({
 
         //$('#map').addClass("hide-on-small-only");
 
-        $('.addMemberPanel').hide();
+        $('.addMemberPanel').show();
         $('.userDetailsPanel').hide();
         $('.selectGroupPanel').hide();
         $('.groupDetailsPanel').hide();
@@ -63,7 +63,7 @@ Template.navbar.events({
         //
         //$('.addMemberPanel').show();
 
-        //$('.userLocationsPanel').show();
+        $('.userLocationsPanel').show();
         $('.map-container').show();
         $('.selectGroupPanel').show();
         //$('.groupDetailsPanel').show();

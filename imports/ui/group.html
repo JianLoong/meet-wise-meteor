@@ -10,15 +10,20 @@
                 <thead>
                 <tr>
                     <th data-field="email">Email</th>
+                    <th data-field=""></th>
                 </tr>
+
                 </thead>
 
                 <tbody>
                 {{#each users}}
                     <tr>
-                        <td>{{email}}</td>
+                        <td>{{email}} {{_id}}</td>
+                        <td>{{> removeMember}}</td>
+                        <!--<td class="removeMember center-align"><i class="material-icons ">delete</i></td>-->
                     </tr>
                 {{/each}}
+
                 </tbody>
             </table>
 
@@ -28,30 +33,7 @@
     </div>
 </template>
 
-<template name="addMember">
-    <div class="addMemberPanel card-panel">
-        <div class="form addMember">
-            <h5>Add Member</h5>
 
-
-            <div class="row">
-                <div class="input-field col s12 l12">
-                    <input value="" id="email" type="email" class="validate"/>
-                    <label for="addMember" data-error="Please enter a valid email." data-success=""
-                           class="">Enter email</label>
-                </div>
-            </div>
-
-            <div class="row">
-                <div class="col s1 l1">&nbsp;</div>
-                <div class="col s10 l10 waves-effect waves-light btn" id="add">
-                    Add
-                </div>
-                <div class="col s1 l1">&nbsp;</div>
-            </div>
-        </div>
-    </div>
-</template>
 
 
 <template name="selectGroup">
@@ -59,7 +41,7 @@
     <div class="selectGroupPanel card-panel col l12">
         {{#with groups}}
             {{#if this.count}}
-                <!--<h3>Select group</h3>-->
+                <h3>Select group</h3>
 
                 {{#if this.count}}
                     <div class="">
@@ -78,14 +60,14 @@
 
 
 
-                <!--<div class="groupMembers">-->
+                <div class="groupMembers">
 
 
-                    <!--{{#each groups}}-->
-                <!--{{> groupMember}}-->
-                    <!--{{/each}}-->
-                <!--</div>-->
-                <!--{{> userLocations}}-->
+                    {{#each groups}}
+                {{> groupMember}}
+                    {{/each}}
+                </div>
+                {{> userLocations}}
 
 
             {{/if}}
@@ -94,61 +76,5 @@
     </div>
 </template>
 
-<template name="createGroup">
-    <div class="createGroupPanel card-panel">
 
-        <div class="form create-group">
-            <h3>Create Group</h3>
-            <div class="row">
-                <div class="">
-                    <div class="input-field col s12 l12">
-                        <input value="" id="form-set-address" type="text" class="validate"
-                               name="formatted-address"/>
-                        <label for="form-set-address" data-error="Please enter an address"
-                               data-success=""
-                               class="">Set Destination Address</label>
-                    </div>
-                </div>
-            </div>
-
-            <div class="row">
-                <div class="">
-                    <div class="input-field col s12 l12">
-                        <input value="" id="group-name" type="text" class="validate"/>
-                        <label for="group-name" data-error="Please enter a group name" data-success=""
-                               class="">Group Name</label>
-                    </div>
-                </div>
-            </div>
-
-            <div class="row">
-                <div class="">
-                    <div class="input-field col s12 l12">
-                        <input type="date" class="datepicker" id="date"/>
-                        <label for="datePicker" data-error="Please enter a date" data-success=""
-                               class="">Date</label>
-                    </div>
-                </div>
-            </div>
-
-            <div class="row">
-                <div class="col s1 l1">&nbsp;</div>
-                <div class="col s4 l4 waves-effect waves-light btn" id="create-group">
-                    Create
-                </div>
-                <div class="col s2 l2">&nbsp;</div>
-                <div class="col s4 l4 waves-effect waves-light btn" id="clear-destination">
-                    Clear
-                </div>
-                <div class="col s1 l1">&nbsp;</div>
-            </div>
-            <div class="details">
-                <input name="lat" id="lat" type="hidden" value="">
-                <input name="lng" id="lng" type="hidden" value="">
-            </div>
-
-        </div>
-
-    </div>
-</template>
 

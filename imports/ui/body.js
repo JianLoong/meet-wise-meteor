@@ -18,15 +18,7 @@ Template.body.onCreated(function bodyOnCreated() {
 Template.body.onRendered( function () {
 
     // $('#map').addClass("hide-on-small-only");
-
-    $('.createGroupPanel').hide();
-    $('.userLocationsPanel').hide();
-
-    $('.selectGroupPanel').hide();
-    $('.groupDetailsPanel').hide();
-    $('.addMemberPanel').hide();
-
-
+    
     $(".dropdown-button").dropdown();
     $(".button-collapse").sideNav();
 });

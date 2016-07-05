@@ -2,9 +2,9 @@ import {Meteor} from 'meteor/meteor';
 import {Template} from 'meteor/templating';
 
 import {Markers} from '../api/markers.js';
+import {Groups} from '../api/groups.js';
 
 import './map.html';
-
 
 var stringToColour = function (str) {
     // str to hash
@@ -13,19 +13,40 @@ var stringToColour = function (str) {
     for (var i = 0, colour = "#"; i < 3; colour += ("00" + ((hash >> i++ * 8) & 0xFF).toString(16)).slice(-2));
 
     return colour;
-}
+};
+
+var circleIcon = function(colour){
+    return {
+        path: "M-20,0a20,20 0 1,0 40,0a20,20 0 1,0 -40,0",
+        fillColor: colour,
+        fillOpacity: 1,
+        anchor: new google.maps.Point(0,0),
+        strokeWeight: 0,
+        scale: 0.8
+    };
+};
+
+var pinSymbol = function (color) {
+    return {
+        path: google.maps.SymbolPath.BACKWARD_CLOSED_ARROW,
+        fillColor: color,
+        fillOpacity: 5,
+        strokeColor: color,
+        strokeWeight: 5,
+        scale: 5,
+    };
+};
+
 
 
 Template.map.onCreated(function () {
 
     GoogleMaps.ready('map', function (map) {
 
-        map.instance.controls[google.maps.ControlPosition.TOP_LEFT].push(
-            document.getElementById('legend')
-        );
-
+        //var groupId = $('#selectGroup').val();
 
         google.maps.event.addListener(map.instance, 'click', function (event) {
+
             if (Meteor.user() == null) {
                 $('.toast').hide();
                 Materialize.toast("Please login first.", 4000);
@@ -36,9 +57,16 @@ Template.map.onCreated(function () {
             var lng = event.latLng.lng();
 
             var groupId = $('#selectGroup').val();
+
             if (groupId == null) {
                 $('.toast').hide();
                 Materialize.toast("Please select a group to add the markers.", 4000);
+                return;
+            }
+
+            if (lat == null || lng == null){
+                $('.toast').hide();
+                Materialize.toast("Please select a valid position on the map.", 4000);
                 return;
             }
 
@@ -51,21 +79,45 @@ Template.map.onCreated(function () {
 
         var icon = "person_pin_circle.png";
 
+        var destinations = [];
+
+        $( "#selectGroup" ).change(function() {
+
+
+            for(var i = 0; i < destinations.length; i++){
+                destinations[i].setMap(null);
+            }
+
+            groupId = $('#selectGroup').val();
+
+            var des = Groups.findOne({
+                _id: groupId
+            });
+
+            var destination = new google.maps.Marker({
+                draggable: false,
+                position: new google.maps.LatLng(des.lat, des.lng),
+                map: map.instance,
+                id: des._id
+            });
+
+            GoogleMaps.maps.map.instance.setCenter(new google.maps.LatLng(des.lat, des.lng));
+
+            destinations.push(destination);
+        });
+
         Tracker.autorun(function () {
+
+            groupId = $('#selectGroup').val();
+
             Markers.find().observe({
+
 
                 added: function (document) {
 
-                    function pinSymbol(color) {
-                        return {
-                            path: google.maps.SymbolPath.BACKWARD_CLOSED_ARROW,
-                            fillColor: color,
-                            fillOpacity: 5,
-                            strokeColor: color,
-                            strokeWeight: 5,
-                            scale: 5,
-                        };
-                    };
+                //groupId = $('#selectGroup').val();
+
+
 
                     var result = Markers.findOne({_id: document._id});
                     var email = result.userid.emails[0].address;
@@ -77,7 +129,11 @@ Template.map.onCreated(function () {
                         position: new google.maps.LatLng(document.lat, document.lng),
                         map: map.instance,
                         id: document._id,
-                        icon: icon
+                        label: {
+                            text: email.charAt(0).toUpperCase(),
+                            color: 'white'
+                        },
+                        icon: circleIcon(stringToColour(email))
 
                     });
 
@@ -182,7 +238,9 @@ Template.map.helpers({
             return {
                 center: new google.maps.LatLng(-37.8136, 144.9631),
                 zoom: 15,
-                disableDefaultUI: true
+                disableDefaultUI: false,
+                streetViewControl: false,
+                style: styles
             };
         }
     },

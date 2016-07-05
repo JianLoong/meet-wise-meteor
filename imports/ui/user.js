@@ -19,6 +19,8 @@ Template.userLocations.events({
     },
 
     'click .jumpMarker'(event){
+        event.preventDefault();
+
         GoogleMaps.maps.map.instance.setCenter(new google.maps.LatLng(this.lat, this.lng));
     },
 
