@@ -18,3 +18,5 @@ Meetwise is a web application done in Meteor.js.
 The core idea of it is to allow the creation of groups with a destination. Each member of the group,
 will specificy their position on the map to allow each of the group member to keep track of where they are.
 
+Currently under construction but available at meetwise.herokuapp.com
+
